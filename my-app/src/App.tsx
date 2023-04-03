@@ -28,7 +28,7 @@ import { useAppSelector, useAppDispatch} from './store/hooks'
 import { fetchTrips } from './store/feature/tripListSlice'
 import MyPost from './components/MyPost';
 export let PORT : string | any
-  process.env.REACT_APP_STATUS === 'production' ? (PORT = process.env.REACT_APP_PROD_PORT):( PORT=process.env.REACT_APP_DEV_PORT) 
+ PORT=process.env.REACT_APP_PROD_PORT
 
 export type Note = {
   id: string 
