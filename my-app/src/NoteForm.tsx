@@ -7,6 +7,7 @@ import { NoteData, Tag, RawNote,RawNoteData } from './types';
 import { v4 as uuidV4} from 'uuid'
 import {useAuth} from './contexts/AuthContext'
 import axios from 'axios'
+import { PORT } from './App'
 
 
 
@@ -23,8 +24,6 @@ export default function NoteForm() {
     const [expense, setExpense] = useState<string>('')
     const [markdowns, setMarkdowns] = useState<string>('')
 
-    let PORT : string | any
-    process.env.REACT_APP_STATUS === 'production' ? (PORT = process.env.REACT_APP_PROD_PORT):( PORT=process.env.REACT_APP_DEV_PORT)
 
 
     const navigate = useNavigate()
