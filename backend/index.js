@@ -6,7 +6,7 @@ const app = express();
 const pool = require("./db")
 const shareRoom = require("./api/shareRoom") 
 
-
+const port = process.env.PORT || 5000
 // middleware 
 app.use(cors({
     origin: "*",
@@ -18,6 +18,6 @@ app.use(express.json()) // equal to body parse app.use(cors());
 
 app.use("/api",shareRoom)
 
-app.listen(5000, ()=>{
+app.listen(port, ()=>{
     console.log('server has started on port 5000')
 })
