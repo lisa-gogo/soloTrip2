@@ -51,6 +51,7 @@ type EditTagsModalProps ={
 export default function NoteList({availableTags,notes, onUpdateTag, onDeleteTag }:NoteListProps) {
 
     const [selectedTags, setSelectedTags] = useState<Tag[]>([])
+    const [notGetTrip, setGetTrip] = useState(true) 
     const [title, setTitle] = useState("")
     const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false)
     const {currentUser, logout} = useAuth();
@@ -65,6 +66,7 @@ export default function NoteList({availableTags,notes, onUpdateTag, onDeleteTag 
     },[])
     const filteredTrips = useMemo(() =>{
       return allTrips.filter( (trip) =>{
+            setGetTrip(false)
         return(
             (title === "" || trip.title.toLowerCase().includes(title.toLocaleLowerCase()))
         )
@@ -123,6 +125,7 @@ export default function NoteList({availableTags,notes, onUpdateTag, onDeleteTag 
         </Col>
         </Row>
     </Form>
+    <div>{notGetTrip && <div>Loading data</div>}</div>
      <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
         {filteredTrips.map(trip => (
           <Col key={trip.id}>
