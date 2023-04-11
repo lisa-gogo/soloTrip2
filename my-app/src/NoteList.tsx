@@ -125,7 +125,7 @@ export default function NoteList({availableTags,notes, onUpdateTag, onDeleteTag 
         </Col>
         </Row>
     </Form>
-    <div>{notGetTrip && <div>Loading data</div>}</div>
+    <div>{notGetTrip && <img src='./assets/loading.gif'></img>}</div>
      <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
         {filteredTrips.map(trip => (
           <Col key={trip.id}>
@@ -174,6 +174,7 @@ const NoteCard=({id,title, user_name,start_time, end_time, place, gender1, gende
                     <div style={{color:"#8B008B", fontWeight: "bold"}}>Expense: </div>
                     <div style={{color:"#8B008B", fontWeight: "bold"}}>{price}/per</div>
                   </div>
+                
                 </Stack>
             </Card.Body>
   </Card>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState}from 'react'
 import { useTrip } from './NoteLayout'
 import { Row, Col,Stack, Badge } from 'react-bootstrap'
 import { Link, useNavigate} from 'react-router-dom'
@@ -9,14 +9,19 @@ import { PORT } from './App'
 import axios from 'axios'
 import { useAppSelector, useAppDispatch} from './store/hooks'
 import { fetchTrips } from './store/feature/tripListSlice'
+import { auth, database } from './config/firebase';
+import {collection, addDoc, setDoc,doc, getDoc} from 'firebase/firestore'
+
 
 
 export default function Note() {
  const trip = useTrip()
  const navigate = useNavigate()
+ const [tripUserEmail, setTripUserEmail] = useState<string>("")
  const {currentUser} = useAuth()
  const start = trip.start_time.substring(0,10)
  const end = trip.end_time.substring(0,10)
+
 const dispatch = useAppDispatch()
 
 
@@ -27,6 +32,13 @@ const dispatch = useAppDispatch()
         }).catch((err: any)=>console.log(err))
 
     }
+
+    const getContactInformation = async (id: string)=>{
+         console.log(id)
+          const data = await getDoc(doc(database, "users", id));
+          const datas = data.data()
+          setTripUserEmail(datas?.email)
+      }
 
  return (
     <>
@@ -79,6 +91,12 @@ const dispatch = useAppDispatch()
          <div style={{display: 'flex'}}>
           <h4>Expense possible in this trip : </h4>
           <h4 style={{marginLeft: '6px', color:'purple'}}>{trip.price}/person</h4>
+        </div>
+          <div style={{display: 'flex'}}>
+           <Button onClick={()=>getContactInformation(trip.user_id)}>Contact information</Button>
+           {!currentUser && <div>Please Login First</div>}
+           {currentUser && <div style={{marginLeft : '5px'}}>{tripUserEmail}</div>}
+         
         </div>
         </Col>
       
