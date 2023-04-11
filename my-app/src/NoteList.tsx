@@ -11,6 +11,7 @@ import { PORT } from './App'
 import {useSelector, useDispatch} from 'react-redux'
 import { useAppSelector, useAppDispatch} from './store/hooks'
 import { fetchTrips } from './store/feature/tripListSlice'
+import loading from './assets/loading.gif'
 
 
 
@@ -125,7 +126,7 @@ export default function NoteList({availableTags,notes, onUpdateTag, onDeleteTag 
         </Col>
         </Row>
     </Form>
-    <div>{notGetTrip && <img src='./assets/loading.gif'></img>}</div>
+    <div>{notGetTrip && <img src={loading} style={{width:"30%"}} alt="loading"></img>}</div>
      <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
         {filteredTrips.map(trip => (
           <Col key={trip.id}>
